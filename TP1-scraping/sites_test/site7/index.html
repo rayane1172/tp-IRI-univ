@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Architecture Moderne - Bâtiments du Monde</title>
+  <style>
+    body {
+      font-family: 'Helvetica', sans-serif;
+      background: #ecf0f1;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .intro {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+
+    .buildings {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .building {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 15px;
+    }
+
+    h3 {
+      color: #3498db;
+      margin: 0 0 5px;
+    }
+
+    p {
+      color: #95a5a6;
+      font-size: 14px;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🏛️ Architecture Moderne</h1>
+  <p class="intro">Les plus beaux bâtiments et structures architecturales du monde</p>
+
+  <div class="buildings">
+    <div class="building">
+      <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=400" alt="Tour Eiffel Paris monument">
+      <div class="info">
+        <h3>Tour Eiffel</h3>
+        <p>Paris, France</p>
+      </div>
+    </div>
+    <div class="building">
+      <img src="https://images.unsplash.com/photo-1555109307-f7d9da25c244?w=400"
+        alt="Gratte-ciel moderne building verre">
+      <div class="info">
+        <h3>Skyline Moderne</h3>
+        <p>Architecture contemporaine</p>
+      </div>
+    </div>
+    <div class="building">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400"
+        alt="Pont Golden Gate San Francisco">
+      <div class="info">
+        <h3>Golden Gate Bridge</h3>
+        <p>San Francisco, USA</p>
+      </div>
+    </div>
+    <div class="building">
+      <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400" alt="Big Ben Londres horloge tower">
+      <div class="info">
+        <h3>Big Ben</h3>
+        <p>Londres, UK</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

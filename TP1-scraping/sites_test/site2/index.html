@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Voitures de Sport - Collection Automobile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #e94560;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .car-card {
+      background: #0f3460;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .title {
+      color: #4ecca3;
+      margin: 10px 0 5px;
+    }
+
+    .desc {
+      color: #a0a0a0;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🏎️ Voitures de Sport</h1>
+  <p>Les plus belles voitures de sport du monde</p>
+
+  <div class="gallery">
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400" alt="Ferrari rouge sur circuit">
+      <h3 class="title">Ferrari 488</h3>
+      <p class="desc">La légendaire voiture italienne</p>
+    </div>
+
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400" alt="Lamborghini jaune Aventador">
+      <h3 class="title">Lamborghini Aventador</h3>
+      <p class="desc">Puissance et élégance</p>
+    </div>
+
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Porsche 911 GT3 blanche">
+      <h3 class="title">Porsche 911 GT3</h3>
+      <p class="desc">L'icône allemande</p>
+    </div>
+
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1621135802920-133df287f89c?w=400" alt="McLaren orange P1">
+      <h3 class="title">McLaren P1</h3>
+      <p class="desc">Technologie de pointe</p>
+    </div>
+
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938?w=400" alt="Bugatti Chiron bleue">
+      <h3 class="title">Bugatti Chiron</h3>
+      <p class="desc">La plus rapide du monde</p>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cuisine du Monde - Recettes et Photos</title>
+  <style>
+    body {
+      font-family: 'Trebuchet MS', sans-serif;
+      background: #fff3e0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #e65100;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      color: #bf360c;
+      margin-bottom: 25px;
+    }
+
+    .recipes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 15px;
+    }
+
+    .dish-name {
+      color: #d84315;
+      margin: 0 0 8px;
+    }
+
+    .origin {
+      color: #8d6e63;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🍽️ Cuisine du Monde</h1>
+  <p class="intro">Voyagez à travers les saveurs internationales</p>
+
+  <div class="recipes">
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" alt="Pizza italienne margherita">
+      <div class="info">
+        <h3 class="dish-name">Pizza Margherita</h3>
+        <p class="origin">🇮🇹 Italie</p>
+      </div>
+    </div>
+
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400" alt="Sushi japonais assortiment">
+      <div class="info">
+        <h3 class="dish-name">Sushi Assortis</h3>
+        <p class="origin">🇯🇵 Japon</p>
+      </div>
+    </div>
+
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400"
+        alt="Couscous marocain traditionnel">
+      <div class="info">
+        <h3 class="dish-name">Couscous Royal</h3>
+        <p class="origin">🇲🇦 Maroc</p>
+      </div>
+    </div>
+
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400" alt="Tacos mexicains au boeuf">
+      <div class="info">
+        <h3 class="dish-name">Tacos al Pastor</h3>
+        <p class="origin">🇲🇽 Mexique</p>
+      </div>
+    </div>
+
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" alt="Croissant français doré">
+      <div class="info">
+        <h3 class="dish-name">Croissant au Beurre</h3>
+        <p class="origin">🇫🇷 France</p>
+      </div>
+    </div>
+
+    <div class="recipe-card">
+      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400" alt="Curry indien épicé">
+      <div class="info">
+        <h3 class="dish-name">Chicken Curry</h3>
+        <p class="origin">🇮🇳 Inde</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
