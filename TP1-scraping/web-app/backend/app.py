@@ -7,6 +7,109 @@ import urllib.parse
 app = Flask(__name__)
 CORS(app)
 
+# Cache global pour stocker tous les mots trouvés dans les sites
+all_words_cache = set()
+
+
+def levenshtein_distance(s1, s2):
+    """
+    Calcule la distance de Levenshtein entre deux chaînes.
+    Plus la distance est petite, plus les mots sont similaires.
+    """
+    if len(s1) < len(s2):
+        return levenshtein_distance(s2, s1)
+
+    if len(s2) == 0:
+        return len(s1)
+
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            # Coût: 0 si les caractères sont identiques, 1 sinon
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+
+    return previous_row[-1]
+
+
+def find_similar_words(query_word, word_list, max_distance=2, max_suggestions=10):
+    query_lower = query_word.lower()
+    suggestions = []
+
+    for word in word_list:
+        word_lower = word.lower()
+        # Ignorer les mots trop courts ou identiques
+        if len(word_lower) < 3 or word_lower == query_lower:
+            continue
+
+        distance = levenshtein_distance(query_lower, word_lower)
+        print(f"Comparing '{query_lower}' with '{word_lower}': distance {distance}")
+
+        #! Ajuster la distance max selon la longueur du mot
+        adjusted_max = max_distance if len(query_lower) > 4 else 1
+
+        if distance <= adjusted_max:
+            suggestions.append((word, distance))
+
+    #! Trier par distance (les plus proches en premier)
+    suggestions.sort(key=lambda x: x[1])
+
+    #! Retourner uniquement les mots (sans les distances)
+    return [word for word, _ in suggestions[:max_suggestions]]
+
+#! site words
+def extract_words_from_site(url):
+    words = set()
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        #! Mots du titre
+        title = soup.find("title")
+        if title:
+            words.update(title.get_text().lower().split())
+
+        #! Mots des alt des images
+        for img in soup.find_all("img"):
+            alt = img.get("alt", "")
+            if alt:
+                words.update(alt.lower().split())
+
+        #! Mots des paragraphes
+        for p in soup.find_all("p"):
+            words.update(p.get_text().lower().split())
+
+        #! Mots des titres h1, h2, h3
+        for tag in soup.find_all(["h1", "h2", "h3"]):
+            words.update(tag.get_text().lower().split())
+
+    except Exception:
+        pass
+
+    #! Filtrer les mots trop courts et nettoyer
+    cleaned_words = set()
+    for word in words:
+        # Nettoyer la ponctuation
+        clean = "".join(c for c in word if c.isalnum())
+        if len(clean) >= 3:
+            cleaned_words.add(clean)
+
+    return cleaned_words
+
+
+def build_words_cache():
+    global all_words_cache
+    all_words_cache = set()
+    for site in SITES:
+        all_words_cache.update(extract_words_from_site(site["url"]))
+    print(f"📚 Cache de mots construit: {len(all_words_cache)} mots uniques")
+
+
 SITES = [
     {
         "id": 1,
@@ -72,12 +175,6 @@ SITES = [
 
 
 def check_words_in_text(text, words, mode="OR"):
-    """
-    Vérifie si les mots sont présents dans le texte
-    mode="OR" : au moins un mot doit être trouvé
-    mode="AND" : tous les mots doivent être trouvés
-    Retourne (bool, list des mots trouvés)
-    """
     if not text:
         return False, []
 
@@ -120,13 +217,13 @@ def search_in_site(url, query_words, mode="OR"):
             src = img.get("src", "")
             alt = img.get("alt", "")
 
-            # Vérifier dans src
+            #! Vérifier dans src
             found_src, matched_src = check_words_in_text(src, query_words, mode)
             if found_src and "url" not in found_methods:
                 found_methods.append("url")
                 all_matched_words.update(matched_src)
 
-            # Vérifier dans alt
+            #! Vérifier dans alt
             found_alt, matched_alt = check_words_in_text(alt, query_words, mode)
             if found_alt and "alt" not in found_methods:
                 found_methods.append("alt")
@@ -217,6 +314,7 @@ def search():
     methods_count = {"title": 0, "url": 0, "alt": 0, "text": 0}
 
     for site in SITES:
+        #! Rechercher dans chaque site
         result = search_in_site(site["url"], query_words, mode)
 
         if result["found"]:
@@ -239,6 +337,23 @@ def search():
                 if method in methods_count:
                     methods_count[method] += 1
 
+    # Si aucun résultat, chercher des suggestions avec Levenshtein
+    suggestions = []
+    if not results:
+        # Construire le cache si nécessaire
+        if not all_words_cache:
+            build_words_cache()
+
+        # Trouver des mots similaires pour chaque mot de la requête
+        for word in query_words:
+            similar = find_similar_words(word, all_words_cache)
+            for s in similar:
+                if s not in suggestions:
+                    suggestions.append(s)
+
+        # Limiter à 8 suggestions max
+        suggestions = suggestions[:8]
+
     return jsonify(
         {
             "query": query,
@@ -248,6 +363,7 @@ def search():
             "total_images": sum(len(r["images"]) for r in results),
             "methods_count": methods_count,
             "results": results,
+            "suggestions": suggestions,
         }
     )
 

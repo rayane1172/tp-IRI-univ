@@ -75,7 +75,7 @@ function App() {
         {loading && <SkeletonLoading />}
         
         {results && !loading && (
-          <Results data={results} query={query} />
+          <Results data={results} query={query} onSearch={handleSearch} />
         )}
         
         {!results && !loading && !error && (

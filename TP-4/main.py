@@ -148,19 +148,19 @@ class ImageSearchEngine:
         # Parcourir l'image bloc par bloc
         for i in range(0, new_height, N):
             for j in range(0, new_width, N):
-                # Extraire le bloc
+                #! Extraire le bloc
                 block = image_array[i : i + N, j : j + N]
 
-                # 2- Calculer la moyenne locale (μ)
+                #! 2- Calculer la moyenne locale (μ)
                 mu = np.mean(block)
 
-                # 3- Calculer l'écart-type local (σ)
+                #!  3- Calculer l'écart-type local (σ)
                 sigma = np.std(block)
 
                 means.append(mu)
                 stds.append(sigma)
 
-        # 4- Construire le descripteur
+        #!  4- Construire le descripteur
         #  les statistiques globales des moyennes et écarts-types
         descriptor = np.array(
             [
@@ -170,7 +170,6 @@ class ImageSearchEngine:
                 np.std(stds),  # Écart-type des écarts-types
             ]
         )
-
         return descriptor
 
     def index_images(self):
@@ -200,6 +199,7 @@ class ImageSearchEngine:
     def euclidean_distance(self, desc1, desc2):
         """Calculer la distance euclidienne entre deux descripteurs"""
         return np.sqrt(np.sum((desc1 - desc2) ** 2))
+
 
     def search_similar_images(self):
         """Rechercher les images similaires à l'image requête"""

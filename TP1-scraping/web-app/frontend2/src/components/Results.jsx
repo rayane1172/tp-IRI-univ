@@ -1,14 +1,35 @@
 import ImageCard from './ImageCard'
 import './Results.css'
 
-function Results({ data, query }) {
+function Results({ data, query, onSearch }) {
   if (!data || data.total_images === 0) {
     return (
       <div className="no-results">
         <div className="no-results-icon">😕</div>
         <h3>Aucun résultat trouvé</h3>
         <p>Aucune image trouvée pour "{query}"</p>
-        <p className="hint">Essayez un autre terme de recherche</p>
+        
+        {/* Suggestions avec Levenshtein */}
+        {data?.suggestions && data.suggestions.length > 0 && (
+          <div className="suggestions-section">
+            <p className="suggestions-label">💡 Vouliez-vous dire :</p>
+            <div className="suggestions-list">
+              {data.suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  className="suggestion-btn"
+                  onClick={() => onSearch && onSearch(suggestion)}
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {(!data?.suggestions || data.suggestions.length === 0) && (
+          <p className="hint">Essayez un autre terme de recherche</p>
+        )}
       </div>
     )
   }
