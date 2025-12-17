@@ -3,95 +3,86 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Espace et Astronomie - Exploration Spatiale</title>
+  <title>Exploration Spatiale</title>
   <style>
     body {
       font-family: 'Courier New', monospace;
       background: #0a0a23;
-      color: #00ff88;
-      padding: 20px;
+      color: #00ff00;
+      padding: 30px;
     }
 
     h1 {
-      color: #fff;
-      text-shadow: 0 0 20px #00ff88;
+      text-align: center;
+      color: #00d4ff;
+      text-shadow: 0 0 20px #00d4ff;
     }
 
-    .subtitle {
+    .intro {
+      text-align: center;
       color: #888;
       margin-bottom: 30px;
     }
 
-    .space-gallery {
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
 
-    .space-item {
-      background: #1a1a3e;
-      border: 1px solid #00ff88;
+    .card {
+      background: #1a1a3a;
+      border: 1px solid #333;
       border-radius: 10px;
       overflow: hidden;
     }
 
     img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
     }
 
-    .caption {
+    .content {
       padding: 15px;
     }
 
     h3 {
-      color: #fff;
-      margin: 0 0 5px;
+      color: #ff6b6b;
+      margin-bottom: 8px;
     }
 
     p {
-      color: #00ff88;
+      color: #aaa;
       font-size: 12px;
-      margin: 0;
     }
   </style>
 </head>
 
 <body>
-  <h1>🚀 Espace et Astronomie</h1>
-  <p class="subtitle">Explorez les mystères de l'univers et les merveilles cosmiques</p>
+  <h1>🚀 EXPLORATION SPATIALE</h1>
+  <p class="intro">La conquête de l'espace grâce à la technologie de pointe.</p>
 
-  <div class="space-gallery">
-    <div class="space-item">
-      <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400"
-        alt="Terre vue depuis l'espace planet">
-      <div class="caption">
-        <h3>Planète Terre</h3>
-        <p>Notre maison vue de l'espace</p>
+  <div class="gallery">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400" alt="Navette spatiale">
+      <div class="content">
+        <h3>Navette Spatiale</h3>
+        <p>Véhicule emblématique de la NASA.</p>
       </div>
     </div>
-    <div class="space-item">
-      <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=400" alt="Lune pleine moon cratères">
-      <div class="caption">
-        <h3>La Lune</h3>
-        <p>Notre satellite naturel</p>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400" alt="Station ISS">
+      <div class="content">
+        <h3>Station ISS</h3>
+        <p>Laboratoire orbital international.</p>
       </div>
     </div>
-    <div class="space-item">
-      <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=400"
-        alt="Astronaute dans l'espace spacewalk">
-      <div class="caption">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=400" alt="Astronaute">
+      <div class="content">
         <h3>Astronaute</h3>
-        <p>Sortie extravéhiculaire</p>
-      </div>
-    </div>
-    <div class="space-item">
-      <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400"
-        alt="Galaxie spirale étoiles nebula">
-      <div class="caption">
-        <h3>Galaxie Spirale</h3>
-        <p>Des milliards d'étoiles</p>
+        <p>Héros de l'exploration spatiale.</p>
       </div>
     </div>
   </div>

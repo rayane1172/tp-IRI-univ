@@ -3,87 +3,88 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Sports Extrêmes - Adrénaline et Aventure</title>
+  <title>Sports Extrêmes</title>
   <style>
     body {
       font-family: 'Impact', sans-serif;
-      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       padding: 20px;
       min-height: 100vh;
     }
 
     h1 {
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      text-align: center;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    .description {
+    .intro {
+      text-align: center;
       font-family: Arial;
-      font-size: 14px;
-      opacity: 0.9;
+      margin-bottom: 30px;
     }
 
-    .sports {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-top: 20px;
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    .sport-card {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
+    .sport {
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      width: 280px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
     img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 10px;
+    }
+
+    .desc {
+      padding: 15px;
+      font-family: Arial;
     }
 
     h3 {
-      margin: 10px 0 5px;
+      margin-bottom: 5px;
     }
 
     p {
-      font-family: Arial;
       font-size: 13px;
-      opacity: 0.8;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
-  <h1>🏄 Sports Extrêmes</h1>
-  <p class="description">Pour les amateurs de sensations fortes et d'adrénaline pure</p>
+  <h1>🏄 SPORTS EXTRÊMES</h1>
+  <p class="intro">L'adrénaline à l'état pur!</p>
 
-  <div class="sports">
-    <div class="sport-card">
-      <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400"
-        alt="Surfeur sur une vague géante surf ocean">
-      <h3>Surf</h3>
-      <p>Domptez les plus grandes vagues</p>
+  <div class="gallery">
+    <div class="sport">
+      <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400" alt="Surf">
+      <div class="desc">
+        <h3>Surf</h3>
+        <p>Glisser sur les vagues de l'océan.</p>
+      </div>
     </div>
-    <div class="sport-card">
-      <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400"
-        alt="Parachutiste en chute libre skydiving">
-      <h3>Parachutisme</h3>
-      <p>Sautez dans le vide</p>
+    <div class="sport">
+      <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=400" alt="Snowboard">
+      <div class="desc">
+        <h3>Snowboard</h3>
+        <p>Dévaler les pentes enneigées.</p>
+      </div>
     </div>
-    <div class="sport-card">
-      <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400"
-        alt="Snowboarder dans la neige montagne">
-      <h3>Snowboard</h3>
-      <p>Glissez sur la poudreuse</p>
-    </div>
-    <div class="sport-card">
-      <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?w=400" alt="Basketball dunk sport ballon">
-      <h3>Basketball</h3>
-      <p>Visez le panier</p>
+    <div class="sport">
+      <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400" alt="Escalade">
+      <div class="desc">
+        <h3>Escalade</h3>
+        <p>Conquérir les sommets rocheux.</p>
+      </div>
     </div>
   </div>
 </body>

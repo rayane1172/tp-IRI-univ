@@ -3,67 +3,87 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Animaux Sauvages - Safari Photos</title>
+  <title>Lions et Animaux Sauvages</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #2d3436;
-      color: white;
-      padding: 20px;
+      font-family: 'Palatino', serif;
+      background: #fdf5e6;
+      padding: 30px;
     }
 
     h1 {
-      color: #fdcb6e;
+      color: #8b4513;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
     }
 
     .gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      justify-content: center;
+      gap: 25px;
     }
 
-    .card {
-      background: #636e72;
-      padding: 15px;
+    .animal {
+      background: white;
       border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 300px;
     }
 
     img {
-      width: 280px;
+      width: 100%;
       height: 200px;
       object-fit: cover;
-      border-radius: 8px;
+    }
+
+    .desc {
+      padding: 15px;
+    }
+
+    h3 {
+      color: #d2691e;
+      margin-bottom: 5px;
     }
 
     p {
-      color: #dfe6e9;
+      color: #555;
+      font-size: 13px;
     }
   </style>
 </head>
 
 <body>
-  <h1>🦁 Animaux Sauvages</h1>
-  <p>Découvrez la faune sauvage dans son habitat naturel</p>
+  <h1>🦁 Lions et Animaux Sauvages</h1>
+  <p class="intro">Les rois de la savane dans leur habitat naturel.</p>
 
   <div class="gallery">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400"
-        alt="Lion majestueux dans la savane africaine">
-      <p>Le roi de la jungle</p>
+    <div class="animal">
+      <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400" alt="Lion majestueux">
+      <div class="desc">
+        <h3>Lion d'Afrique</h3>
+        <p>Le roi de la savane dans toute sa splendeur.</p>
+      </div>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400"
-        alt="Éléphant d'Afrique avec ses défenses">
-      <p>Éléphant d'Afrique</p>
+    <div class="animal">
+      <img src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=400" alt="Lionne">
+      <div class="desc">
+        <h3>Lionne chasseuse</h3>
+        <p>La lionne, véritable chasseuse du groupe.</p>
+      </div>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=400"
-        alt="Girafe dans la savane au coucher du soleil">
-      <p>Girafe élégante</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1544985361-b420d7a77043?w=400" alt="Zèbre avec ses rayures uniques">
-      <p>Zèbre rayé</p>
+    <div class="animal">
+      <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=400" alt="Lionceaux">
+      <div class="desc">
+        <h3>Lionceaux</h3>
+        <p>Jeunes lionceaux jouant ensemble.</p>
+      </div>
     </div>
   </div>
 </body>

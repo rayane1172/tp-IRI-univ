@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Technologie et Innovation - Gadgets High-Tech</title>
+  <title>Technologie et Innovation</title>
   <style>
     body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #263238;
-      color: #eceff1;
+      font-family: 'Roboto', sans-serif;
+      background: #121212;
+      color: #e0e0e0;
       padding: 20px;
     }
 
@@ -17,101 +17,72 @@
       text-align: center;
     }
 
-    .tagline {
+    .intro {
       text-align: center;
-      color: #78909c;
+      color: #888;
       margin-bottom: 30px;
     }
 
-    .products {
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 25px;
     }
 
-    .product {
-      background: #37474f;
+    .card {
+      background: #1e1e1e;
       border-radius: 12px;
-      padding: 20px;
-      text-align: center;
+      overflow: hidden;
+      border: 1px solid #333;
     }
 
     img {
-      max-width: 200px;
-      height: 150px;
+      width: 100%;
+      height: 180px;
       object-fit: cover;
-      margin: 0 auto;
-      display: block;
-      border-radius: 8px;
     }
 
-    .product-name {
-      color: #4dd0e1;
-      margin: 15px 0 5px;
+    .content {
+      padding: 15px;
     }
 
-    .product-desc {
-      color: #90a4ae;
+    h3 {
+      color: #4caf50;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #aaa;
       font-size: 13px;
-    }
-
-    .price {
-      color: #69f0ae;
-      font-weight: bold;
-      margin-top: 10px;
     }
   </style>
 </head>
 
 <body>
-  <h1>💻 Technologie & Innovation</h1>
-  <p class="tagline">Les dernières innovations high-tech</p>
+  <h1>💻 Technologie et Innovation</h1>
+  <p class="intro">La technologie moderne équipe les voitures de sport et la conquête de l'espace.</p>
 
-  <div class="products">
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
-        alt="Smartphone dernier modèle avec écran OLED">
-      <h3 class="product-name">Smartphone Pro Max</h3>
-      <p class="product-desc">Écran OLED 6.7", Camera 108MP</p>
-      <p class="price">999€</p>
+  <div class="gallery">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400" alt="Laptop moderne">
+      <div class="content">
+        <h3>Laptop Ultrabook</h3>
+        <p>Ordinateur portable puissant et léger.</p>
+      </div>
     </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400"
-        alt="Laptop gaming haute performance">
-      <h3 class="product-name">Laptop Gaming Elite</h3>
-      <p class="product-desc">RTX 4080, i9, 32GB RAM</p>
-      <p class="price">2499€</p>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400" alt="Circuit électronique">
+      <div class="content">
+        <h3>Intelligence Artificielle</h3>
+        <p>L'IA révolutionne notre monde.</p>
+      </div>
     </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
-        alt="Montre connectée pour le sport">
-      <h3 class="product-name">SmartWatch Fitness</h3>
-      <p class="product-desc">GPS, Cardiofréquencemètre</p>
-      <p class="price">299€</p>
-    </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
-        alt="Casque audio sans fil bluetooth">
-      <h3 class="product-name">Casque Audio Pro</h3>
-      <p class="product-desc">Réduction de bruit active</p>
-      <p class="price">349€</p>
-    </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" alt="Tablette graphique pour dessin">
-      <h3 class="product-name">Tablette Créative</h3>
-      <p class="product-desc">Stylet 8192 niveaux, 4K</p>
-      <p class="price">799€</p>
-    </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=400" alt="Drone avec caméra 4K">
-      <h3 class="product-name">Drone Explorer</h3>
-      <p class="product-desc">Caméra 4K, 30min autonomie</p>
-      <p class="price">599€</p>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Gaming setup">
+      <div class="content">
+        <h3>Gaming Setup</h3>
+        <p>Configuration gaming ultime.</p>
+      </div>
     </div>
   </div>
 </body>
