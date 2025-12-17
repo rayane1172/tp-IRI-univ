@@ -3,12 +3,14 @@ from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
 import urllib.parse
+import threading
 
 app = Flask(__name__)
 CORS(app)
 
-# Cache global pour stocker tous les mots trouvés dans les sites
+# Caches globaux pour accélérer les recherches
 all_words_cache = set()
+html_cache = {}  # Cache des pages HTML pour éviter de re-télécharger
 
 
 def levenshtein_distance(s1, s2):
@@ -36,7 +38,7 @@ def levenshtein_distance(s1, s2):
     return previous_row[-1]
 
 
-def find_similar_words(query_word, word_list, max_distance=2, max_suggestions=10):
+def find_similar_words(query_word, word_list, max_distance=5 max_suggestions=10):
     query_lower = query_word.lower()
     suggestions = []
 
@@ -60,6 +62,7 @@ def find_similar_words(query_word, word_list, max_distance=2, max_suggestions=10
 
     #! Retourner uniquement les mots (sans les distances)
     return [word for word, _ in suggestions[:max_suggestions]]
+
 
 #! site words
 def extract_words_from_site(url):
@@ -191,9 +194,16 @@ def check_words_in_text(text, words, mode="OR"):
 
 def search_in_site(url, query_words, mode="OR"):
     try:
-        response = requests.get(url, timeout=5)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, "html.parser")
+        # Utiliser le cache HTML si disponible
+        if url in html_cache:
+            html_content = html_cache[url]
+        else:
+            response = requests.get(url, timeout=5)
+            response.raise_for_status()
+            html_content = response.text
+            html_cache[url] = html_content  # Mettre en cache
+
+        soup = BeautifulSoup(html_content, "html.parser")
 
         found_methods = []
         all_matched_words = set()
@@ -371,22 +381,49 @@ def search():
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify(
-        {"status": "ok", "message": "API du moteur de recherche opérationnelle"}
+        {
+            "status": "ok",
+            "message": "API du moteur de recherche opérationnelle",
+            "cache_words": len(all_words_cache),
+            "cache_pages": len(html_cache),
+        }
     )
 
 
+@app.route("/api/clear-cache", methods=["POST"])
+def clear_cache():
+    """Vide les caches et les reconstruit"""
+    global html_cache, all_words_cache
+    html_cache = {}
+    all_words_cache = set()
+    preload_caches()
+    return jsonify({"status": "ok", "message": "Caches vidés et reconstruits"})
+
+
+def preload_caches():
+    """Pré-charge les pages HTML et le cache de mots au démarrage"""
+    global html_cache, all_words_cache
+    print(" Pré-chargement des caches...")
+
+    # Pré-charger toutes les pages HTML
+    for site in SITES:
+        try:
+            response = requests.get(site["url"], timeout=5)
+            response.raise_for_status()
+            html_cache[site["url"]] = response.text
+            print(f"   {site['name']} chargé")
+        except Exception as e:
+            print(f"   {site['name']} - Erreur: {e}")
+
+    # Construire le cache de mots
+    build_words_cache()
+    print(f" Caches prêts! {len(html_cache)} pages, {len(all_words_cache)} mots")
+
+
 if __name__ == "__main__":
-    # print("=" * 60)
-    # print("🚀 API Backend - Moteur de Recherche d'Images")
-    # print("=" * 60)
-    # print("📍 Endpoints disponibles:")
-    # print("   GET /api/health  - Vérifier le status de l'API")
-    # print("   GET /api/sites   - Liste des sites")
-    # print("   GET /api/search?q=query&mode=OR - Rechercher (mode OR/AND)")
-    # print("")
-    # print("📝 Exemples:")
-    # print("   /api/search?q=chat             - Recherche simple")
-    # print("   /api/search?q=chat noir&mode=OR  - Au moins un mot")
-    # print("   /api/search?q=chat noir&mode=AND - Tous les mots")
-    # print("=" * 60)
-    app.run(debug=True, port=5000)
+
+    # Pré-charger les caches au démarrage (en arrière-plan)
+    preload_thread = threading.Thread(target=preload_caches)
+    preload_thread.start()
+
+    app.run(debug=True, port=5000, use_reloader=False)
